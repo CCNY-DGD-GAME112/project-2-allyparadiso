@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
 
 public class Projectile3DController : MonoBehaviour
 {
@@ -9,12 +10,15 @@ public class Projectile3DController : MonoBehaviour
     public Rigidbody RB;
     
     //How fast do I fly?
-    public float Speed = 30;
+    public float Speed = 15;
     //How hard do I knockback things I hit?
-    public float Knockback = 10;
+    public float Knockback = 5;
+    public Camera Eyes;
+   
 
     void Start()
     {
+        transform.forward = Eyes.transform.forward;
         //When I spawn, I fly straight forwards at my Speed
         RB.linearVelocity = transform.forward * Speed;
     }
@@ -27,8 +31,18 @@ public class Projectile3DController : MonoBehaviour
         {
             //I push them in the direction I'm flying with a power equal to my Knockback stat
             rb.AddForce(RB.linearVelocity.normalized * Knockback,ForceMode.Impulse);
+
+        }
+        GameObject otherGameObject = other.gameObject;
+        
+
+        if (otherGameObject.CompareTag("Rat"))
+        {
+            Movement health = otherGameObject.GetComponent<Movement>();
+            health.TakeDamage();
         }
         //If I hit anything, I despawn
         Destroy(gameObject);
     }
+
 }

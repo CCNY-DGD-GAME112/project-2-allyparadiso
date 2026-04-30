@@ -2,19 +2,23 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class FirstPersonController : MonoBehaviour
 {
+    
     //The camera is inside the player
     public Camera Eyes;
     
     public Rigidbody RB;
     public Projectile3DController ProjectilePrefab;
+    public GameObject eyeShoot;
     
     //Character stats
     public float MouseSensitivity = 3;
     public float WalkSpeed = 10;
     public float JumpPower = 7;
+    public int maxHealth = 10;
+    public int currentHealth;
     
     //A list of all the solid objects I'm currently touching
     public List<GameObject> Floors;
@@ -26,6 +30,7 @@ public class FirstPersonController : MonoBehaviour
         //Turn off my mouse and lock it to center screen
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        currentHealth = maxHealth;
     }
 
     
@@ -71,8 +76,11 @@ public class FirstPersonController : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             //Spawn a projectile right in front of my eyes
-            Instantiate(ProjectilePrefab, Eyes.transform.position + Eyes.transform.forward,
-                Eyes.transform.rotation);
+            eyeShoot.transform.forward = Eyes.transform.forward;
+            //Vector3 bulletSpawnPosition = new Vector3(Eyes.transform.position.x, Eyes.transform.position.y, Eyes.transform.position.z);
+
+            Instantiate(ProjectilePrefab, eyeShoot.transform.position + eyeShoot.transform.forward,
+                eyeShoot.transform.rotation);
         }
     }
 
@@ -95,5 +103,19 @@ public class FirstPersonController : MonoBehaviour
     {
         //When I stop touching something, remove it from the list of things I'm touching
         Floors.Remove(other.gameObject);
+    }
+    public void TakeDamage()
+    {
+        currentHealth -= 1;
+        if(currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+    public void Die()
+    {
+        SceneManager.LoadScene("GameOver");
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 }

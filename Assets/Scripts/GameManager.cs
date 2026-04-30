@@ -1,11 +1,13 @@
-using UnityEngine;
 using TMPro;
+
+using UnityEngine;
+
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    public TextMeshProUGUI scoreText;
-    public int score = 0;
+    public TextMeshProUGUI killCountText;
+    public int kills = 0;
 
     private void Awake()
     {
@@ -18,5 +20,18 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-   
+    private void Update()
+    {
+        UpdateKillCount();
+    }
+    public void AddKill()
+    {
+        kills++;
+        UpdateKillCount();
+    }
+
+    void UpdateKillCount()
+    {
+        killCountText.text = "Kills: " + kills.ToString();
+    }
 }
