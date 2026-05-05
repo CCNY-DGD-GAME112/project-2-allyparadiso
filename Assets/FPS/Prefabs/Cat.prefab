@@ -1456,12 +1456,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86989b8ee66489c4cb6f0b3ae4bb1490, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FirstPersonController
-  gameSceneName: GameOver
   Eyes: {fileID: 5994847388843037677}
   RB: {fileID: 7863769770926051034}
   ProjectilePrefab: {fileID: 0}
   eyeShoot: {fileID: 2216587285668357612}
-  MouseSensitivity: 3
+  MouseSensitivity: 2
   WalkSpeed: 10
   JumpPower: 7
   maxHealth: 10

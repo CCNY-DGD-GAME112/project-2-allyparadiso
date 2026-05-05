@@ -54,7 +54,7 @@ MonoBehaviour:
   nextDamageTime: 0
   damageCooldown: 2
   currentDirection: {x: 0, y: 0, z: 0}
-  speed: 30
+  speed: 15
 --- !u!65 &2813220890262526958
 BoxCollider:
   m_ObjectHideFlags: 0
