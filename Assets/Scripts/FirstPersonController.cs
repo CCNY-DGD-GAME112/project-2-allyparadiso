@@ -106,6 +106,10 @@ public class FirstPersonController : MonoBehaviour
     }
     public void TakeDamage()
     {
+        if (GameManager.instance != null)
+        {
+            GameManager.instance.SubtractHealth();
+        }
         currentHealth -= 1;
         if(currentHealth <= 0)
         {
@@ -114,8 +118,9 @@ public class FirstPersonController : MonoBehaviour
     }
     public void Die()
     {
-        SceneManager.LoadScene("GameOver");
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        if (GameManager.instance != null)
+        {
+            GameManager.instance.EndGame();
+        }
     }
 }
