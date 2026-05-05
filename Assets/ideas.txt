@@ -1,0 +1,9 @@
+cat parkour
+
+enemies are mice, spawn on timer
+enemies drop treats when killed
+treats = score
+
+environment = kitchen or any room with tables/counters
+
+grab mechanic: little collider on edge of counter, when player hits, turn gravity off temporarily
